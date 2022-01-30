@@ -1,0 +1,54 @@
+@page
+@model dotnetRun.Pages_Orders.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Shopper)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].itemID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Qty)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Order) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Discriminator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Shopper.Discriminator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.itemID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qty)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.OrderID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.OrderID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.OrderID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
